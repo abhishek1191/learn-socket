@@ -1,13 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
+import { subscribeToTimer } from './api';
+import {useState, useEffect} from "react";
 
 function App() {
+  const [ts, setTs] = useState("no value yet");
+  useEffect(() => {
+    subscribeToTimer(1000, (err, timestamp) => setTs(timestamp));
+  },[])
   return (
-    <div className="App">
+    <div className="App" id="root">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Current Timestamp is {ts}
         </p>
         <a
           className="App-link"
